@@ -10,11 +10,9 @@ Author: Arturo Casal
 Requirements
 ------------------
 
-python2.7
-
-python-bluez/pybluez (Python wrappers around BlueZ stack)
-
-pygi (Python GObject Instrospection needed by the gui version)
+* python2.7
+* python-bluez/pybluez (Python wrappers around BlueZ stack)
+* pygi (Python GObject Instrospection needed by the gui version)
 
 Usage
 --------

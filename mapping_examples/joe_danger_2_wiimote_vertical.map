@@ -1,0 +1,81 @@
+# Wiipad generic Xbox 360 mapping
+
+# ^100 axis -> scale = 100 or axis->button sensitivity
+# %20 deadzone = 20%, dead zones are computed for each stick axis combination (X and Y), and single unpaired axes
+
+profile.name = "Jor Danger 2 mapping"
+
+# Wiimote in vertical orientation
+profile.wiimote.a = XBOX360_B
+profile.wiimote.b = XBOX360_Y
+profile.wiimote.minus = XBOX360_BACK
+profile.wiimote.home = XBOX360_GUIDE
+profile.wiimote.plus = XBOX360_START
+profile.wiimote.one = XBOX360_X
+profile.wiimote.two = XBOX360_A
+profile.wiimote.left = XBOX360_DOWN
+profile.wiimote.right = XBOX360_UP
+profile.wiimote.up = XBOX360_LEFT
+profile.wiimote.down = XBOX360_RIGHT
+profile.wiimote.shake = XBOX360_RB
+profile.wiimote.accel_y = XBOX360_LT,XBOX360_RT ^70 %3
+
+# From this point, equals generic xbox 360 mapping
+
+# Wiimote + Nunchuk combination
+profile.wiimotenunchuk.a = XBOX360_A
+profile.wiimotenunchuk.b = XBOX360_B
+profile.wiimotenunchuk.minus = XBOX360_BACK
+profile.wiimotenunchuk.home = XBOX360_GUIDE
+profile.wiimotenunchuk.plus = XBOX360_START
+profile.wiimotenunchuk.nunchuk.c = XBOX360_LB
+profile.wiimotenunchuk.nunchuk.z = XBOX360_RT
+profile.wiimotenunchuk.down = XBOX360_RB
+profile.wiimotenunchuk.shake = XBOX360_X ^220
+profile.wiimotenunchuk.nunchuk.shake = XBOX360_Y ^220
+profile.wiimotenunchuk.nunchuk.axis_x = XBOX360_LEFT_STICK_X
+profile.wiimotenunchuk.nunchuk.axis_y = XBOX360_LEFT_STICK_Y
+
+# Classic Controller
+profile.classic.a = XBOX360_A
+profile.classic.b = XBOX360_B
+profile.classic.x = XBOX360_X
+profile.classic.y = XBOX360_Y
+profile.classic.left = XBOX360_DOWN
+profile.classic.right = XBOX360_UP
+profile.classic.up = XBOX360_LEFT
+profile.classic.down = XBOX360_RIGHT
+profile.classic.minus = XBOX360_BACK
+profile.classic.home = XBOX360_GUIDE
+profile.classic.plus = XBOX360_START
+profile.classic.rt = XBOX360_RT
+profile.classic.lt = XBOX360_LT
+profile.classic.zr = XBOX360_RB
+profile.classic.zl = XBOX360_LB
+profile.classic.axis_x = XBOX360_LEFT_STICK_X %5
+profile.classic.axis_y = XBOX360_LEFT_STICK_Y %5
+profile.classic.axis_rx = XBOX360_RIGHT_STICK_X %5
+profile.classic.axis_ry = XBOX360_RIGHT_STICK_Y %5
+
+# WiiU Pro Controller
+profile.pro.a = XBOX360_A
+profile.pro.b = XBOX360_B
+profile.pro.x = XBOX360_X
+profile.pro.y = XBOX360_Y
+profile.pro.left = XBOX360_DOWN
+profile.pro.right = XBOX360_UP
+profile.pro.up = XBOX360_LEFT
+profile.pro.down = XBOX360_RIGHT
+profile.pro.minus = XBOX360_BACK
+profile.pro.home = XBOX360_GUIDE
+profile.pro.plus = XBOX360_START
+profile.pro.rt = XBOX360_RB
+profile.pro.lt = XBOX360_LB
+profile.pro.zr = XBOX360_RT
+profile.pro.zl = XBOX360_LT
+profile.pro.axis_x = XBOX360_LEFT_STICK_X %5
+profile.pro.axis_y = XBOX360_LEFT_STICK_X %5
+profile.pro.axis_rx = XBOX360_RIGHT_STICK_X
+profile.pro.axis_ry = XBOX360_RIGHT_STICK_Y
+profile.pro.lthumb = XBOX360_LEFT_STICK
+profile.pro.rthumb = XBOX360_RIGHT_STICK

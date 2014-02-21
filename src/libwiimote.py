@@ -23,11 +23,14 @@ import select
 import time
 import sys
 import logging
+import array
 
 if sys.version_info < (3, 0):
 	import Queue as queue
+	socket_to_bytearray = lambda x: map(ord, x)
 else:
 	import queue
+	socket_to_bytearray = lambda x: x
 
 def i2bs(val):
 	lst = []
@@ -550,7 +553,7 @@ class WiiDeviceReceiver(threading.Thread):
 		data = []
 		for inr in inputready[:]:
 			ev = inr.recv(32)
-			x= map(ord,ev)
+			x = socket_to_bytearray(ev)
 			dev = self.getDeviceByDataSocket(inr)
 			if len(ev) <= 0:
 				dev.disconnect()
@@ -701,10 +704,9 @@ class WiiDevice():
 		self.extension_change_callback = callback
 	
 	def _send_data(self,data):
-		str_data = ""
-		for each in data:
-			str_data += chr(each)
-		ret = self.sendsocket.send(chr(self.CMD_SET_REPORT) + str_data)
+		msg = [self.CMD_SET_REPORT] + list(data)
+		str_data = array.array('B', msg).tostring()
+		ret = self.sendsocket.send(str_data)
 		return ret
 
 	def wiiproto_cmd_wmem(self, address, value, eeprom=False):
@@ -774,7 +776,6 @@ class WiiDevice():
 			if not self.state.flags & WiiProtoState.FLAG_EXT_PLUGGED:
 				self.state.flags |= WiiProtoState.FLAG_EXT_PLUGGED
 				# Call detect extension
-				#self.cmd_queue.notifyStatus()
 				logging.debug("New extension detected")
 				t1 = threading.Thread(target=self.init_extension, kwargs={"notify":True})
 				t1.start()
@@ -785,7 +786,6 @@ class WiiDevice():
 				self.state.flags &= ~WiiProtoState.FLAG_MP_PLUGGED
 				self.state.flags &= ~WiiProtoState.FLAG_MP_ACTIVE
 				# Call detect extension (to disable extension)
-				#self.cmd_queue.notifyStatus()
 				logging.debug("Extension unplugged")
 				t1 = threading.Thread(target=self.init_extension, kwargs={"notify":True})
 				t1.start()
@@ -804,7 +804,7 @@ class WiiDevice():
 			self.wiiproto_cmd_wmem(0xa400fb, 0x00)
 			# read extensions
 			rmem = self.wiiproto_cmd_rmem(0xa400fa, 6)
-			logging.debug("RMEM ext: "+repr(map(hex, rmem)))
+			logging.debug("RMEM ext: "+repr(list(map(hex, rmem))))
 			if rmem[0] == 0xff and rmem[1] == 0xff and rmem[2] == 0xff and rmem[3] == 0xff and rmem[4] == 0xff and rmem[5] == 0xff:
 				return WiiDevExtension.WIIMOTE_EXT_NONE
 			if rmem[4] == 0x00 and rmem[5] == 0x00:
@@ -893,7 +893,7 @@ class WiiDevice():
 		if len(inputready) <= 0:
 			return []
 		ev = inputready[0].recv(32)
-		x= map(ord,ev)
+		x = socket_to_bytearray(ev)
 		return x
 	
 	def processInputData(self, x):
@@ -905,6 +905,7 @@ class WiiDevice():
 				with self.state.command_ready:
 					if self.state.cmd_type == WiiProtoReqs.WIIPROTO_REQ_STATUS:
 						self.state.cmd_buffer = x[2:]
+						self.state.cmd_error = 0x00
 						self.handler_status(x[2:])
 						handled = True
 						self.state.command_ready.notify()
@@ -915,6 +916,7 @@ class WiiDevice():
 				with self.state.command_ready:
 					if self.state.cmd_type == WiiProtoReqs.WIIPROTO_REQ_RMEM:
 						self.state.cmd_buffer = x[7:]
+						self.state.cmd_error = 0x00
 						self.state.command_ready.notify()
 						
 			elif code == WiiProtoReqs.WIIPROTO_REQ_RETURN:
@@ -977,7 +979,7 @@ class WiiDevice():
 
 		receiver.addDevice(self)
 		status = self.wiiproto_req_status()
-		logging.debug("Status: "+repr(map(hex, status)))	
+		logging.debug("Status: "+repr(list(map(hex, status))))
 		
 		self.init_detect()
 		self.wiiproto_req_drm()

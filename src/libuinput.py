@@ -23,8 +23,12 @@ import os
 import threading
 import select
 import logging
+import sys
 
 import uinputdefs
+
+if sys.version_info >= (3,):
+	buffer = lambda x: memoryview(x).tobytes()
 
 def open_uinput():
 	# Open uinput device

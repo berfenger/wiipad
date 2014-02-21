@@ -65,7 +65,12 @@ def scan_wiimotes(duration=5):
 
 def connectDevice(device, mapping):
 	led = acquireLedSlot()
-	w = wiimote_uinput_glue.UInputWiimote(device[0], device[1], mapping, led=led, disconnectCallback=onDeviceDisconnected)
+	try:
+		w = wiimote_uinput_glue.UInputWiimote(device[0], device[1], mapping, led=led, disconnectCallback=onDeviceDisconnected)
+	except:
+		logging.warning("Could not connect to device: "+repr(device[0])+" "+repr(device[1]))
+		releaseLedSlot(led)
+		return
 	with deviceListLock:
 		deviceList.append(w)
 	for l in eventListeners:

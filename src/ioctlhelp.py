@@ -20,6 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # See linux/include/uapi/asm-generic/ioctl.h
 
 import struct
+import sys
+
+if sys.version_info >= (3,):
+	unicode = str
 
 _IOC_NRBITS = 8
 _IOC_TYPEBITS = 8

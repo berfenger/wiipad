@@ -84,13 +84,13 @@ class NunchukDescription(WiimoteDescription):
 	axis[ACCEL_NY] = True
 	axis[ACCEL_NZ] = True
 	
-	abs_params = dict(WiimoteDescription.abs_params.items() + {
+	abs_params = dict(list(WiimoteDescription.abs_params.items()) + list({
 		AXIS_X : ABS_Params(_min=-120, _max=120, _fuzz=2, _flat=4),
 		AXIS_Y : ABS_Params(_min=-120, _max=120, _fuzz=2, _flat=4),
 		ACCEL_NX : ABS_Params(_min=-500, _max=500, _fuzz=2, _flat=4),
 		ACCEL_NY : ABS_Params(_min=-500, _max=500, _fuzz=2, _flat=4),
 		ACCEL_NZ : ABS_Params(_min=-500, _max=500, _fuzz=2, _flat=4)
-	}.items())
+	}.items()))
 	
 class ClassicControllerDescription():
 	BTN_A = 0

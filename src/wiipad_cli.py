@@ -48,14 +48,14 @@ if __name__ == "__main__":
 			print_help()
 			sys.exit(2)
 		for opt, arg in opts:
-			if opt == '-h':
+			if opt == ('-h',):
 				print_help()
 				sys.exit()
 			elif opt in ("-m", "--mapfile"):
 				mapfile = arg
-			elif opt in ("-s"):
+			elif opt in ("-s",):
 				continuous = True
-			elif opt in ("-d"):
+			elif opt in ("-d",):
 				logging.basicConfig(level=logging.DEBUG)
 				
 		if mapfile == None:

@@ -19,11 +19,11 @@ Usage
 There are two flavours of wiipad: a command-line interface (cli) and a slightly graphical interface based on an app-indicator (gui).
 
 CLI version:
-    $ ./wiipad_cli.sh -m mapping.map  (mapping.map is a file containing the mapping applied at runtime)
+```$ ./wiipad_cli.sh -m mapping.map  (mapping.map is a file containing the mapping applied at runtime)```
 The program will search for devices for 5 seconds at start time. Moreover, you can enable continuous scanning at start time by adding the option -s on the command line.
 
 GUI version:
-    $ ./wiipad.sh -m mapping.map  (mapping.map is a file containing the mapping applied at runtime)
+```$ ./wiipad.sh -m mapping.map  (mapping.map is a file containing the mapping applied at runtime)```
 Now, you can trigger device scanning by clicking on the proper indicator item. Also, you can enable continuous scanning at start time by adding the option -s on the command line.
 
 Installation (Ubuntu)

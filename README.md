@@ -10,8 +10,8 @@ Author: Arturo Casal
 Requirements
 ------------------
 
-* python2.7
-* python-bluez/pybluez (Python wrappers around BlueZ stack)
+* python2.7 or python3
+* PyBluez >= 0.18
 * pygi (Python GObject Instrospection needed by the gui version)
 
 Usage
@@ -19,12 +19,22 @@ Usage
 There are two flavours of wiipad: a command-line interface (cli) and a slightly graphical interface based on an app-indicator (gui).
 
 CLI version:
-$ ./wiipad_cli.sh -m mapping.map  (mapping.map is a file containing the mapping applied at runtime)
+    $ ./wiipad_cli.sh -m mapping.map  (mapping.map is a file containing the mapping applied at runtime)
 The program will search for devices for 5 seconds at start time. Moreover, you can enable continuous scanning at start time by adding the option -s on the command line.
 
 GUI version:
-$ ./wiipad.sh -m mapping.map  (mapping.map is a file containing the mapping applied at runtime)
+    $ ./wiipad.sh -m mapping.map  (mapping.map is a file containing the mapping applied at runtime)
 Now, you can trigger device scanning by clicking on the proper indicator item. Also, you can enable continuous scanning at start time by adding the option -s on the command line.
+
+Installation (Ubuntu)
+---------------------
+    $ sudo apt-get install python-pip
+    $ sudo pip install --upgrade PyBluez
+    
+    If you don't have write permissions on /dev/uinput:
+    $ sudo cp udev_rules/90-uinput.rules /etc/udev/rules.d/
+    $ sudo service udev restart
+    Now restart the computer to apply changes and have write permission on /dev/uinput
 
 What's not supported
 --------------------
